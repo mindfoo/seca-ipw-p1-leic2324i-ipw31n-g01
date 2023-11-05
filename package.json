@@ -1,0 +1,29 @@
+{
+  "name": "seca-ipw-p1-leic2324i-ipw31n-g01",
+  "version": "1.0.0",
+  "description": "Trabalho 2 - Disciplina de IPW - LEIC31N - Grupo 1",
+  "main": "seca-server.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node seca-server.mjs",
+    "start-dev": "nodemon seca-server.mjs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isel-leic-ipw/seca-ipw-p1-leic2324i-ipw31n-g01.git"
+  },
+  "author": "Bernardo Pontes e Margarida Pascoal",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/isel-leic-ipw/seca-ipw-p1-leic2324i-ipw31n-g01/issues"
+  },
+  "homepage": "https://github.com/isel-leic-ipw/seca-ipw-p1-leic2324i-ipw31n-g01#readme",
+  "devDependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "nodemon": "^3.0.1",
+    "swagger-ui-express": "^4.5.0",
+    "yamljs": "^0.3.0",
+    "dotenv": "^16.3.1"
+  }
+}

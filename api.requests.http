@@ -1,0 +1,5 @@
+
+// to use REST CLIENT EXTENSION
+
+### GET ALL EVENTS
+GET http://localhost:3000/events
