@@ -12,10 +12,11 @@ info:
   version: 1.0.0
 servers:
   - description: Localhost server for testing API
-    url: http://localhost:1904/
+    url: http://localhost:3000/
 
 tags:
 - name: Events
+- name: Groups
 - name: Users
 
 paths:

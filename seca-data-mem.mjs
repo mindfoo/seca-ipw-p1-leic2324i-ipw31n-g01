@@ -3,44 +3,57 @@
 
 import * as dotenv from 'dotenv';
 dotenv.config();
-const NUM_EVENTS = 20
-const url = 'https://app.ticketmaster.com';
 
-let events = new Array(NUM_EVENTS).fill(0, 0, NUM_EVENTS)
+export let eventsInMem = [];
+
+export let groupsInMem = [];
+
+let nextId = groupsInMem.length+1
+
+
+// EVENTS
+
+export async function setEventsInMem(data) {
+    console.log("this is data", data)
+    eventsInMem = data
     .map((_, idx) => { 
         return {
-            id: idx,
-            title: `Event ${idx}`,
-            description: `Event ${idx} description`,
+            name: _.name,
+            date: _.dates.start.dateTime,
+            segment: 'wtf',
+            genre: 'where is this',
             userId: idx % 2 
         } 
     })
-
-let nextId = NUM_EVENTS
-
-
-export async function getEvents(userId, page=1, size=20) {
-    // fazer autenticação de user aqui?
-    try{
-        // {{URL}}/discovery/v2/events.json&?size=1&sort=relevance,desc&page=1&apikey={{API_KEY}}
-        const response = await fetch(`${url}/discovery/v2/events.json?page=${page}&size=${size}&sort=relevance,desc&apikey=${process.env.API_KEY}`);
-        const data = await response.json();
-        return data;
-    } catch (err) {
-        console.log(err);
-    }
+    return eventsInMem;
 }
 
 export async function getEvent(userId, eventId) {
-    return findEventAndDoSomething(userId, eventId, event => event)
+    return getEventDetails(userId, eventId, event => event)
 }
 
 export async function deleteEventFromGroup(userId, eventId, groupId) {
-    return findEventAndDoSomething(
+    return deleteEvent(
         userId, 
         eventId, 
         (event, eventIdx) => { 
             events.splice(eventIdx, 1)
             return event
         })
+}
+
+
+// GROUPS
+
+export async function setGroupInMem(data) {
+    console.log("adeus", data)
+    const group = {
+        id: nextId++,
+        name: data.n,
+        description: data.d,
+        events: []
+    }
+
+    groupsInMem.push(group)
+    return group
 }

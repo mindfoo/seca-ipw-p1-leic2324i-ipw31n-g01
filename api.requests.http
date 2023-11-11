@@ -1,5 +1,36 @@
 
 // to use REST CLIENT EXTENSION
 
-### GET ALL EVENTS
-GET http://localhost:3000/events
+### GET ALL EVENTS FROM TM
+GET http://localhost:3000/events?s=2&p=1
+
+
+### GET ALL EVENTS FROM MEM
+GET http://localhost:3000/eventsFromMem
+
+
+### GET EVENT DETAILS FROM TM
+GET http://localhost:3000/events/:id
+
+
+
+### POST NEW GROUP
+POST http://localhost:3000/groups
+content-type: application/json
+
+{
+    "n": "aaai",
+    "d": "aaaai"
+}
+
+### GET ALL GROUPS
+GET http://localhost:3000/groups
+
+### GET GROUP BY ID
+GET http://localhost:3000/groups/2
+
+
+
+
+
+

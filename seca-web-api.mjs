@@ -1,40 +1,53 @@
 // Module that contains the functions that handle all HTTP APi requests
 
 import * as eventsServices from './seca-services.mjs'
+import * as eventsMem from './seca-data-mem.mjs'
 
 // EVENTS
 
 export async function getEvents(req, rsp) {
-    const events = await eventsServices.getEvents()
-    rsp.json(events)
+    console.log("banana",req.query)
+    let page = req.query.p;
+    let size = req.query.s;
+    const events = await eventsServices.getEvents(page, size)
+    return rsp.json(events)
+}
+
+export function getEventsFromMem(req, rsp) {
+    return rsp.json(eventsMem.eventsInMem)
 }
 
 export async function getEvent(req, rsp) {
-    getEvent(req.params.id, rsp, event => rsp.json(event))
+    return getEvent(req.params.id, rsp, event => rsp.json(event))
 }
 
 
 // GROUP
 
 export async function createGroup(req, rsp) {
+    console.log("req", req.body)
     try {
         let newGroup = await eventsServices.createGroup(req.body)
-        rsp
-            .status(201)
-            .json({
-                status: `Group with id ${newGroup.id} created with success`,
-                newGroup: newGroup
-                })
+        rsp.status(201)
+        .json({
+            status: `Group with id ${newGroup.id} created with success`,
+            newGroup: newGroup
+        })
             
         } catch(e) {
-            rsp
-                .status(400)
-                .json({error: `Error creating group: ${e}`})
+            rsp.status(400)
+            .json({error: `Error creating group: ${e}`})
         }
 }
 
+export async function getGroups(req, rsp) {
+    return rsp.json(eventsMem.groupsInMem)
+}
+
 export async function getGroup(req, rsp) {
-    getGroup(req.params.id, rsp, group => rsp.json(group))
+    console.log("eheh", eventsMem.groupsInMem)
+    const group = eventsMem.groupsInMem.filter(el => req.params.id == el.id )
+    return rsp.json(group)
 }
 
 export async function deleteGroup(req, rsp) {
